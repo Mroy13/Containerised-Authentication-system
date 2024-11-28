@@ -1,0 +1,43 @@
+version: "3"
+networks:
+  micro-net:
+    driver: bridge
+volumes:
+  authentication-nodemodules:
+  my-db:
+services:
+  db-service:
+    image: "postgres"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${USER}"]
+      interval: 10s
+      retries: 5
+    networks:
+      - micro-net
+    restart: always
+  
+    environment:
+      POSTGRES_DB: 'mroy13'               
+      POSTGRES_USER: ${USER}          
+      POSTGRES_PASSWORD: ${PASSWORD}
+    ports:
+      - '5432:5432'   
+    expose:
+      - '5432'
+    volumes:
+      - my-db:/var/lib/mysql
+
+  authentication-service:
+    entrypoint: ["./entrypoint.sh"]
+    build: ./Authentication-service
+    networks:
+      - micro-net
+    ports:
+      - "3001:3001"
+    depends_on:
+       db-service:
+         condition: service_healthy
+    volumes:
+      - ./Authentication-service:/d/fstack_dev/IS_projects/Containerised-Authentication-systeme/Authentication-service
+      - authentication-nodemodules:/d/fstack_dev/IS_projects/Containerised-Authentication-system/Authentication-service/node_modules
+  
