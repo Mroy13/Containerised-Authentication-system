@@ -36,7 +36,7 @@ cd <project-folder>
     ```plaintext
     PORT=3001
     SALT_ROUNDS=8
-    SECRET_KEY='mroy13'
+    SECRET_KEY='enter-your-secret-key'
     ```
 
 ### 3. Generate the Sequelize Configuration
