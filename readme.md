@@ -47,20 +47,16 @@ cd <project-folder>
     ```
 2. Update the generated `config/config.json` file with the following PostgreSQL credentials:
     ```json
-    {
-  "development": {
-    "username": "<USER from root .env>",
-    "password": "<PASSWORD from root .env>",
-    "database": "your_database",
-    "host": "db-service-name",
-    "dialect": "postgres"
-  }
-  }
-  Replace "db-service-name" with the actual name of your PostgreSQL container service in docker-compose.yml.
-
-
-
-    ```
+      {
+      "development": {
+      "username": "<USER from root .env>",
+      "password": "<PASSWORD from root .env>",
+      "database": "your_database",
+      "host": "db-service-name",
+      "dialect": "postgres"
+      }
+    }
+  ```
 
 ### 4. Start the Application
 
